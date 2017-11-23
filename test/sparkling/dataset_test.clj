@@ -40,7 +40,7 @@
           condition (.equalTo (sut/col ds "name") "C.N.1")
           cols      (sut/cols ds ["name" "description"])
           result    (-> ds
-                        (sut/select-col-exprs cols)
+                        (sut/select-columns cols)
                         (sut/where condition))
           row       (sut/first result)]
       (is (= 1 (sut/count result)))

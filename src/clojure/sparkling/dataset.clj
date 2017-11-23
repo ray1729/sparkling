@@ -347,15 +347,11 @@
 
 (defn select-columns
   "Selects a set of columns."
-  [^Dataset dataset column-names]
-  {:pre [(seq column-names)]}
-  (.select dataset (clojure.core/first column-names) (into-array String (rest column-names))))
-
-(defn select-col-exprs
-  "Selects a set of column based expressions."
-  [^Dataset dataset col-exprs]
-  {:pre [(seq col-exprs)]}
-  (.select dataset (into-array Column col-exprs)))
+  [^Dataset dataset columns]
+  {:pre [(seq columns)]}
+  (if (string? (clojure.core/first columns))
+    (.select dataset (clojure.core/first columns) (into-array String (rest columns)))
+    (.select dataset (into-array Column columns))))
 
 (defn select-expr
   "Selects a set of SQL expressions."
