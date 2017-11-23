@@ -259,7 +259,7 @@
   "Join with another DataFrame."
   ([^Dataset dataset ^Dataset right & {:keys [expr type using] :or {type :inner}}]
    {:pre [(xor expr using)
-          (contains? #{:inner :outer :left-outer :right-outer :leftsemi} type)]}
+          (contains? #{:inner :outer :left-outer :right-outer :leftsemi :leftanti} type)]}
    (.join dataset right (or expr using) (->snake_case_string type))))
 
 (defn limit
